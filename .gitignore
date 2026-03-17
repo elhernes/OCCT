@@ -4,7 +4,6 @@
 # ============================================================================
 
 # Root level: Ignore everything except tracked items
-/*
 !/.clang-format
 !/.git-blame-ignore-revs
 !/.gitattributes

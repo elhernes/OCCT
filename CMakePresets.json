@@ -1,0 +1,74 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": { "major": 3, "minor": 21, "patch": 0 },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "generator": "Ninja",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE":               "Release",
+        "BUILD_LIBRARY_TYPE":             "Shared",
+        "USE_FREETYPE":                   "OFF",
+        "USE_TK":                         "OFF",
+        "USE_OPENGL":                     "OFF",
+        "USE_TBB":                        "OFF",
+        "USE_DRACO":                      "OFF",
+        "USE_FFMPEG":                     "OFF",
+        "USE_FREEIMAGE":                  "OFF",
+        "USE_RAPIDJSON":                  "OFF",
+        "USE_VTK":                        "OFF",
+        "BUILD_MODULE_FoundationClasses": "ON",
+        "BUILD_MODULE_ModelingData":      "ON",
+        "BUILD_MODULE_ModelingAlgorithms":"ON",
+        "BUILD_MODULE_DataExchange":      "ON",
+        "BUILD_MODULE_ApplicationFramework": "ON",
+        "BUILD_MODULE_Visualization":     "OFF",
+        "BUILD_MODULE_Draw":              "OFF",
+        "BUILD_GTEST":                    "OFF"
+      }
+    },
+    {
+      "name": "macOS",
+      "displayName": "macOS arm64 Release",
+      "inherits": "base",
+      "binaryDir": "${sourceDir}/.build/macOS",
+      "cacheVariables": {
+        "CMAKE_OSX_ARCHITECTURES":        "arm64",
+        "CMAKE_OSX_DEPLOYMENT_TARGET":    "13.0",
+        "CMAKE_OSX_SYSROOT":              "macosx"
+      }
+    },
+    {
+      "name": "iOS",
+      "displayName": "iOS arm64 Release",
+      "inherits": "base",
+      "binaryDir": "${sourceDir}/.build/iOS",
+      "cacheVariables": {
+        "CMAKE_SYSTEM_NAME":              "iOS",
+        "CMAKE_OSX_ARCHITECTURES":        "arm64",
+        "CMAKE_OSX_DEPLOYMENT_TARGET":    "16.0",
+        "CMAKE_OSX_SYSROOT":              "iphoneos",
+        "CMAKE_CXX_FLAGS":                "-DHAVE_OBJC_ARC"
+      }
+    },
+    {
+      "name": "iOS-simulator",
+      "displayName": "iOS Simulator arm64 Release",
+      "inherits": "base",
+      "binaryDir": "${sourceDir}/.build/iOS-simulator",
+      "cacheVariables": {
+        "CMAKE_SYSTEM_NAME":              "iOS",
+        "CMAKE_OSX_ARCHITECTURES":        "arm64",
+        "CMAKE_OSX_DEPLOYMENT_TARGET":    "16.0",
+        "CMAKE_OSX_SYSROOT":              "iphonesimulator",
+        "CMAKE_CXX_FLAGS":                "-DHAVE_OBJC_ARC"
+      }
+    }
+  ],
+  "buildPresets": [
+    { "name": "macOS",          "configurePreset": "macOS" },
+    { "name": "iOS",            "configurePreset": "iOS" },
+    { "name": "iOS-simulator",  "configurePreset": "iOS-simulator" }
+  ]
+}
